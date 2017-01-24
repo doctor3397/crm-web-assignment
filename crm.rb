@@ -34,7 +34,6 @@ end
 
 # Create the Form Route
 # Add the following GET route in crm.rb: "/contacts/new"
-
 get '/contacts/new' do
-
+  erb :new_contact
 end
