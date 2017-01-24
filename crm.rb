@@ -32,8 +32,25 @@ end
 # 1. the first will be a GET route to display the form that will let us enter and submit our data,
 # 2. and the second will be a POST route that will be in charge of accepting the data your user just submitted, and creating & saving a new contact.
 
-# Create the Form Route
-# Add the following GET route in crm.rb: "/contacts/new"
+# GET request for form
+# Create the Form Route, add the following GET route in crm.rb: "/contacts/new"
 get '/contacts/new' do
   erb :new_contact
+end
+
+# POST data from form
+# We won't create a new contact, we'll just inspect the data submitted by the form.
+# In order to do this, we'll do a puts statement on the params.
+# Every time your make a request, the params hash is available inside any route block. It's especially useful when you're submitting a form, and it should contain the body of the request.
+post '/contacts' do
+  @contact = Contact.create(params[:first_name], params[:last_name], params[:email], params[:note])
+  #erb :contact_created
+
+  # REDIRECT back to top level
+  # Redirect back to the View all contacts page so that we can view our latest addition.
+  redirect to('/contacts')
+  #erb :contacts
+  # puts params
+  # Terminal
+  # {"first_name"=>"Theresa", "last_name"=>"Shen", "email"=>"ts@io", "note"=>"CEO"}
 end
