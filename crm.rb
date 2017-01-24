@@ -1,7 +1,14 @@
 # Implement the new web-based CRM here.
 # Do NOT copy the CRM class from the old crm assignment, as it won't work at all for the web-based version!
 # You'll have to implement it from scratch.
+require_relative 'contact'
 require 'sinatra'
+
+# Add some fake data to crm.rb using the Contact class.
+# Fake data
+Contact.create('Mark', 'Zuckerberg', 'mark@facebook.com', 'CEO')
+Contact.create('Sergey', 'Brin', 'sergey@google.com', 'Co-Founder')
+Contact.create('Steve', 'Jobs', 'steve@apple.com', 'Visionary')
 
 # create a route. It allows you to match a particular request method and path
 # and prepare a specific response for this request.
@@ -12,4 +19,9 @@ get '/' do
 
   # Template
   erb :index
+end
+
+# create a new route that corresponds to a GET request to "/contacts"
+get '/contacts' do
+  erb :contacts
 end

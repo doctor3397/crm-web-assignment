@@ -1,0 +1,16 @@
+<!-- we can now iterate over each item with a bit of embedded Ruby: -->
+
+<h1>All Contacts</h1>
+
+<ul>
+<% Contact.all.each do |contact| %>
+  <li><%= contact.first_name %> <%= contact.last_name %>
+    <%= contact.email %> <%= contact.note %>
+  </li>
+<% end %>
+</ul>
+
+<!-- Two different Ruby wrappers in this erb file:
+
+<% %> is great for each statements and other blocks, since it won't actually output the value inside the wrappers, but only execute the code.
+<%= %> behaves much more like a puts. Change them and see what happens. -->
