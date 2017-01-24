@@ -21,7 +21,20 @@ get '/' do
   erb :index
 end
 
+# View all Contacts
 # create a new route that corresponds to a GET request to "/contacts"
 get '/contacts' do
   erb :contacts
+end
+
+# Add Add a New Contact
+# This particular feature is going to require 2 routes:
+# 1. the first will be a GET route to display the form that will let us enter and submit our data,
+# 2. and the second will be a POST route that will be in charge of accepting the data your user just submitted, and creating & saving a new contact.
+
+# Create the Form Route
+# Add the following GET route in crm.rb: "/contacts/new"
+
+get '/contacts/new' do
+
 end
