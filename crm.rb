@@ -7,5 +7,9 @@ require 'sinatra'
 # and prepare a specific response for this request.
 # This particular route ('/') matches the top level of your website, i.e. The base page of http://localhost:4567.
 get '/' do
+  # setting up an instance variable @crm_app_name that we'll be able to pass along to our view.
+  @crm_app_name = "Theresa's CRM System"
+
+  # Template
   erb :index
 end
