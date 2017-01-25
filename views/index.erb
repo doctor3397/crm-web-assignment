@@ -1,9 +1,15 @@
-<h1>Welcome to <%= @crm_app_name %>!</h1>
-<p>Main menu</p>
 <!-- We want to replace the static name of our site with the value from our newly-declared instance variable. To do so, you'll need to use "alligator tags": <%= %> -->
 
-<ul>
-  <li><a href="/contacts">View all contacts</a></li>
-  <!-- please complete me with links to other actions -->
+<p>
+  There are <%= Contact.all.count %> contacts
+</p>
 
+<ul>
+<% Contact.all.each do |contact| %>
+  <li><%= contact.first_name %> <%= contact.last_name %> ( <%= contact.email %> )
+    <br>
+    <a href="edit">EDIT</a>
+    <a href="delete">DELETE</a>
+  </li>
+<% end %>
 </ul>
