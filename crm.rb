@@ -66,6 +66,11 @@ end
 # Making a generalized route means that instead of defining a route that only matches one thing literally, we can write one that matches a pattern, a wildcard of sorts. Patterns work by putting a colon ahead of the item we want to match and capture.
 get '/contacts/:id' do
   @contact = Contact.find(params[:id].to_i)
-
-  erb :show_contact
+  if @contact
+    erb :show_contact
+  else
+    # when we can't find the contact matching the request, @contact is nil.
+    # return a 404 Not Found response status code if we can't find the resource.
+    raise Sinatra::NotFound
+  end
 end
