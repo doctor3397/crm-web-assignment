@@ -115,7 +115,10 @@ class Contact
 
   # This method should delete the contact
   def delete
-    @@contacts.delete(self)
+    @@contacts.delete_if { |contact| contact.id == self.id }
   end
+  # def delete
+  #   @@contacts.delete(self)
+  # end
 
 end
