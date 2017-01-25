@@ -115,3 +115,18 @@ put '/contacts/:id' do
     raise Sinatra::NotFound
   end
 end
+
+# DELETE for delete a contact
+# create a route that can handle DELETE '/contacts/:id' request.
+# Inside this block, you'll need to remove a contact.
+delete '/contacts/:id' do
+  @contact = Contact.find(params[:id].to_i)
+  # If the contact exists, it should be removed and redirect back to the '/contacts' main page.
+  if @contact
+    @contact.delete
+    redirect to('/contacts')
+  # Otherwise, it should raise a 404.
+  else
+    raise Sinatra::NotFound
+  end
+end
