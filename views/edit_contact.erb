@@ -1,0 +1,14 @@
+<h1>Edit a Contact</h1>
+
+<!-- Updating data,
+we need to tell our form to use the method PUT. However, it's not as simple as setting up "post". HTML Forms only support GET and POST as request methods.
+
+Sinatra, Rails, and many other web frameworks provide a workaround convention: by adding an extra hidden field called "_method" that contains the real value of the request (in this case we're working with PUT so that value will be put). -->
+<form action='/contacts/<%= @contact.id %>' method='post'>
+  <input type='hidden' name='_method' value='put'>
+  <input type='text' name='first_name' value='<%= @contact.first_name %>'>
+  <input type='text' name='last_name' value='<%= @contact.last_name %>'>
+  <input type='text' name='email' value='<%= @contact.email %>'>
+  <input type='text' name='note' value='<%= @contact.note %>'>
+  <input type='submit' value='Edit Contact'>
+</form>
