@@ -53,6 +53,7 @@ post '/contacts' do
   # {"first_name"=>"Theresa", "last_name"=>"Shen", "email"=>"ts@io", "note"=>"CEO"}
 end
 
+ # GET one contact with ID
  # create a route that corresponds to this user. Since URLs are supposed to represent a single resource, if we create the route "/contacts/1", we know exactly which resource we're looking for!
  # Inside this route,
  # 1. we need to first find our contact,
@@ -71,6 +72,18 @@ get '/contacts/:id' do
   else
     # when we can't find the contact matching the request, @contact is nil.
     # return a 404 Not Found response status code if we can't find the resource.
+    raise Sinatra::NotFound
+  end
+end
+
+# Edit a contact
+#  1. display the edit form
+# 2. to handle the form submission.
+get '/contacts/:id/edit' do
+  @contact = Contact.find(params[:id].to_i)
+  if @contact
+    erb :edit_contact
+  else
     raise Sinatra::NotFound
   end
 end
