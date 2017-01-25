@@ -16,4 +16,6 @@ Start by adding a delete form and submit button to the bottom of your views/show
 </form>
 
  <!-- Add a link to the edit page for that user, so that your users can go directly to the edit from after viewing a contact. -->
-<a href="/contacts/<%= @contact.id%>/edit">Edit Contact</a>
+<a href="/contacts/<%= @contact.id%>/edit">
+  <button type="button" name="button">Edit Contact</button>
+</a>
