@@ -5,6 +5,7 @@
 <ul>
 <% Contact.all.each do |contact| %>
   <li>
+    <!-- make each contact name a link to its individual show page.  -->
     <a href="/contacts/<%= contact.id%>">
       <%= contact.first_name %> <%= contact.last_name %>
     </a>
