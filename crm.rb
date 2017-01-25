@@ -1,10 +1,6 @@
-# Implement the new web-based CRM here.
-# Do NOT copy the CRM class from the old crm assignment, as it won't work at all for the web-based version!
-# You'll have to implement it from scratch.
 require_relative 'contact'
 require 'sinatra'
 
-# Add some fake data to crm.rb using the Contact class.
 # Fake data
 Contact.create('Marty', 'McFly', 'marty@mcfly.com', 'CEO')
 Contact.create('George', 'McFly', 'george@mcfly.com', 'Co-Founder')
@@ -55,4 +51,13 @@ post '/contacts' do
   # puts params
   # Terminal
   # {"first_name"=>"Theresa", "last_name"=>"Shen", "email"=>"ts@io", "note"=>"CEO"}
+end
+
+ # create a route that corresponds to this user. Since URLs are supposed to represent a single resource, if we create the route "/contacts/1", we know exactly which resource we're looking for!
+ # Inside this route,
+ # 1. we need to first find our contact,
+ # 2. and then display the results in a view called 
+get '/contacts/1' do
+  @contact = Contact.find(1)
+  erb :show_contact
 end
