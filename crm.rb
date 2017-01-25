@@ -63,6 +63,10 @@ end
 #   erb :show_contact
 # end
 
+# GET /contacts/:id  (show a particular contact)
+# PUT /contacts/:id  (update a particular contact)
+# GET /contacts/:id/edit  (shows the edit form for a particular contact)
+
 # Generalize
 # Making a generalized route means that instead of defining a route that only matches one thing literally, we can write one that matches a pattern, a wildcard of sorts. Patterns work by putting a colon ahead of the item we want to match and capture.
 get '/contacts/:id' do
@@ -76,7 +80,7 @@ get '/contacts/:id' do
   end
 end
 
-# Edit a contact
+# GET to edit a contact
 #  1. display the edit form
 # 2. to handle the form submission.
 get '/contacts/:id/edit' do
@@ -84,6 +88,30 @@ get '/contacts/:id/edit' do
   if @contact
     erb :edit_contact
   else
+    raise Sinatra::NotFound
+  end
+end
+
+# PUT for form submission
+# Once we submit the form that we just created, our server will receive a put request to '/contacts/:id', we should create a route to handle this request.
+# This route handles a put request about a particular id.
+put '/contacts/:id' do
+  # params hash will contain the id along with any of information we submitted in the form.
+  # With the id from the params, we try to find the contact.
+  @contact = Contact.find(params[:id].to_i)
+
+  # If the contact is found, we need to update it.
+  if @contact
+    @contact.first_name = params[:first_name]
+    @contact.last_name = params[:last_name]
+    @contact.email = params[:email]
+    @contact.note = params[:note]
+
+    #  Once it's updated, we want to redirect to our main contacts page.
+    redirect to('/contacts')
+  else
+
+    # If there's ever any reason we don't find it, we raise the 404 Not Found error.
     raise Sinatra::NotFound
   end
 end
