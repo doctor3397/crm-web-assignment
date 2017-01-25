@@ -8,8 +8,9 @@
 <% Contact.all.each do |contact| %>
   <li><%= contact.first_name %> <%= contact.last_name %> ( <%= contact.email %> )
     <br>
-    <a href="edit">EDIT</a>
-    <a href="delete">DELETE</a>
+    <!-- /contacts/:id/edit -->
+    <a href="/contacts/<%=contact.id%>/edit">EDIT</a>
+    <a href="/contacts/<%=contact.id%>">DELETE</a>
   </li>
 <% end %>
 </ul>
