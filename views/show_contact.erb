@@ -2,3 +2,15 @@
 <p><strong>Email:</strong> <%= @contact.email %></p>
 <p><strong>Note:</strong></p>
 <p><%= @contact.note %></p>
+
+<!--Removing a contact
+
+Though removing a contact and making a request for the DELETE action requires a form, it doesn't actually need any more inputs than a submit button and a hidden "_method" field, because the DELETE action and the URL that represents the contact resource are sufficient. We don't need additional input from the user.
+
+Start by adding a delete form and submit button to the bottom of your views/show_contact.erb view: -->
+
+<!-- when you're using PUT and DELETE, you must include the additional "_method" hidden field that contains the method as a value. The form's actual method must also be "post". It won't work if you set it to get. -->
+<form action='/contacts/<%= @contact.id %>' method='post'>
+  <input type='hidden' name='_method' value='delete'>
+  <input type='submit' value='Delete Contact'>
+</form>
