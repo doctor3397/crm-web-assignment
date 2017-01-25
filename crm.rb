@@ -56,8 +56,16 @@ end
  # create a route that corresponds to this user. Since URLs are supposed to represent a single resource, if we create the route "/contacts/1", we know exactly which resource we're looking for!
  # Inside this route,
  # 1. we need to first find our contact,
- # 2. and then display the results in a view called 
-get '/contacts/1' do
-  @contact = Contact.find(1)
+ # 2. and then display the results in a view called
+# get '/contacts/1' do
+#   @contact = Contact.find(1)
+#   erb :show_contact
+# end
+
+# Generalize
+# Making a generalized route means that instead of defining a route that only matches one thing literally, we can write one that matches a pattern, a wildcard of sorts. Patterns work by putting a colon ahead of the item we want to match and capture.
+get '/contacts/:id' do
+  @contact = Contact.find(params[:id].to_i)
+
   erb :show_contact
 end
