@@ -2,11 +2,11 @@ require_relative 'contact'
 require 'sinatra'
 
 # Fake data
-Contact.create('Marty', 'McFly', 'marty@mcfly.com', 'CEO')
-Contact.create('George', 'McFly', 'george@mcfly.com', 'Co-Founder')
-Contact.create('Lorraine', 'McFly', 'lorraine@mcfly.com', 'Co-Founder')
-Contact.create('Biff', 'Tannen', 'biff@tannen.com', 'Co-Founder')
-Contact.create('Doc', 'Brown', 'doc@brown.com', 'Co-Founder')
+# Contact.create(first_name: 'Marty', last_name: 'McFly', email: 'marty@mcfly.com', note: 'CEO')
+# Contact.create('George', 'McFly', 'george@mcfly.com', 'Co-Founder')
+# Contact.create('Lorraine', 'McFly', 'lorraine@mcfly.com', 'Co-Founder')
+# Contact.create('Biff', 'Tannen', 'biff@tannen.com', 'Co-Founder')
+# Contact.create('Doc', 'Brown', 'doc@brown.com', 'Co-Founder')
 
 # create a route. It allows you to match a particular request method and path
 # and prepare a specific response for this request.
@@ -129,4 +129,14 @@ delete '/contacts/:id' do
   else
     raise Sinatra::NotFound
   end
+end
+
+#Ensuring the database connection is closed
+# By default, SQLite allows 5 concurrent connections.
+#Unfortunately, MiniRecord will open connections, but it won't close them automatically. What this means is that every 6th time you restart your server, there won't be any connections left and you'll get a mysterious Timeout error.
+#
+# To fix this, add the following snippet of code to the bottom of your crm.rb file:
+#This will close the connection to the database after each request has been responded to.
+after do
+  ActiveRecord::Base.connection.close
 end
